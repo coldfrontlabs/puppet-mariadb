@@ -1,1 +1,5 @@
-{"name": "bootsrapcluster"}
+
+{
+  "description": "Bootstrap the first node in a galera cluster",
+  "input_method": "stdin"
+}
