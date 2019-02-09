@@ -1,5 +1,6 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 
+# @see https://mariadb.com/kb/en/library/getting-started-with-mariadb-galera-cluster/#bootstrapping-a-new-cluster
 require 'json'
 require 'open3'
 require 'puppet'
