@@ -30,7 +30,7 @@ class mariadb::params {
   $wsrep_sst_method      = 'mysqldump'
   $root_password         = 'UNSET' # lint:ignore:security_password_in_code
 
-  if ($::osfamily == 'RedHat' and Integer($::operatingsystemmajrelease) >= 6) {
+  if ($::osfamily == 'RedHat') and (Integer($::operatingsystemmajrelease) >= 6) {
     if (Integer($::operatingsystemmajrelease) >= 8) {
       # client.pp
       $client_package_name = 'mariadb-client'
@@ -45,11 +45,6 @@ class mariadb::params {
 
       # backup
       $backup_package_name = 'mariadb-backup'
-      }
-      # client.pp
-      $client_package_name = 'mariadb-client'
-      $shared_package_name = 'mariadb-shared'
-      $devel_package_name  = 'mariadb-devel'
     }
     else {
       # client.pp
