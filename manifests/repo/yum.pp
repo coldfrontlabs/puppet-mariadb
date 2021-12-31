@@ -7,7 +7,7 @@ class mariadb::repo::yum {
   $os      = $mariadb::repo::os
   $arch    = $mariadb::repo::arch
 
-  if ($::operatingsystemmajrelease >= 8) {
+  if (Integer($::operatingsystemmajrelease) >= 8) {
     yumrepo { 'mariadb':
       baseurl         => "http://yum.mariadb.org/${version}/${os}${::operatingsystemmajrelease}-${arch}",
       descr           => 'MariaDB',
