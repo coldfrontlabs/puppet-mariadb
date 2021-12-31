@@ -30,37 +30,11 @@ class mariadb::params {
   $wsrep_sst_method      = 'mysqldump'
   $root_password         = 'UNSET' # lint:ignore:security_password_in_code
 
-  if ($::osfamily == 'RedHat') and (Integer($::operatingsystemmajrelease) >= 6) {
-    if (Integer($::operatingsystemmajrelease) >= 8) {
-      # client.pp
-      $client_package_name = 'mariadb-client'
-      $shared_package_name = 'mariadb-shared'
-      $devel_package_name  = 'mariadb-devel'
-
-      # server.pp
-      $server_package_name = 'mariadb-server'
-
-      # cluster.pp
-      $cluster_package_name = 'mariadb-galera-server'
-
-      # backup
-      $backup_package_name = 'mariadb-backup'
-    }
-    else {
-      # client.pp
-      $client_package_name = 'MariaDB-client'
-      $shared_package_name = 'MariaDB-shared'
-      $devel_package_name  = 'MariaDB-devel'
-
-      # server.pp
-      $server_package_name = 'MariaDB-server'
-
-      # cluster.pp
-      $cluster_package_name = 'MariaDB-Galera-server'
-
-      # backup
-      $backup_package_name = 'MariaDB-backup'
-    }
+  if ($::osfamily == 'RedHat') and (versioncmp($::operatingsystemrelease, '6.0') >= 0) {
+    # client.pp
+    $client_package_name = 'MariaDB-client'
+    $shared_package_name = 'MariaDB-shared'
+    $devel_package_name  = 'MariaDB-devel'
 
     # user.pp
     $user      = 'mysql'
@@ -81,6 +55,14 @@ class mariadb::params {
     $pidfile        = '/var/lib/mysql/mysqld.pid'
     $wsrep_provider = '/usr/lib64/galera/libgalera_smm.so'
 
+    # server.pp
+    $server_package_name = 'MariaDB-server'
+
+    # cluster.pp
+    $cluster_package_name = 'MariaDB-Galera-server'
+
+    # backup
+    $backup_package_name = 'MariaDB-backup'
   } elsif ($::osfamily == 'Debian') and (
     (($::operatingsystem == 'Debian') and (versioncmp($::operatingsystemrelease, '7.0') >= 0)) or
     (($::operatingsystem == 'Ubuntu') and (versioncmp($::operatingsystemrelease, '12.0') >= 0))
