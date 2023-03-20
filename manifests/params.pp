@@ -54,6 +54,8 @@ class mariadb::params {
     $config_dir     = '/etc/my.cnf.d'
     $pidfile        = '/var/lib/mysql/mysqld.pid'
     $wsrep_provider = '/usr/lib64/galera/libgalera_smm.so'
+    # @todo galera 4 is actually at so we need ln -s /usr/lib64/galera-4 /usr/lib64/galera
+    # or change this value depending on the version of galera.
 
     # server.pp
     $server_package_name = 'MariaDB-server'
