@@ -5,7 +5,7 @@
 class mariadb::repo::percona::yum {
 
   yumrepo { 'percona-release':
-    baseurl  => "http://repo.percona.com/release/${::operatingsystemmajrelease}/RPMS/${::architecture}",
+    baseurl  => "http://repo.percona.com/release/${facts['os']['release']['major']}/RPMS/${facts['os']['architecture']}",
     descr    => 'Percona-Release',
     enabled  => '1',
     gpgcheck => '1',

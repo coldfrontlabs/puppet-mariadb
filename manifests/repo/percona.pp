@@ -14,7 +14,7 @@ class mariadb::repo::percona {
       class { 'mariadb::repo::percona::apt': }
     }
     default: {
-      fail("Unsupported managed repository for ${::osfamily}, currently only supports RedHat and Debian")
+      fail("Unsupported managed repository for ${facts['os']['family']}, currently only supports RedHat and Debian")
     }
   }
 }

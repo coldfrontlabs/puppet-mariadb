@@ -13,7 +13,7 @@ class mariadb::repo::yum {
   }
 
   yumrepo { 'mariadb':
-    baseurl         => "http://yum.mariadb.org/${version}/${os}${::operatingsystemmajrelease}-${arch}",
+    baseurl         => "http://yum.mariadb.org/${version}/${os}${facts['os']['release']['major']}-${arch}",
     descr           => 'MariaDB',
     enabled         => '1',
     gpgcheck        => '1',
