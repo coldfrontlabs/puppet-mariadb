@@ -7,7 +7,7 @@ class mariadb::repo::yum {
   $os      = $mariadb::repo::os
   $arch    = $mariadb::repo::arch
 
-  $module_hotfixes = $::operatingsystemmajrelease ? {
+  $module_hotfixes = $facts['os']['name']majrelease ? {
     '8'     => '1',
     default => '0',
   }

@@ -65,10 +65,10 @@ class mariadb::server (
   -> anchor { 'mariadb::server::end': }
 
   if $::settings::storeconfigs and $storeconfigs_enabled {
-    Mysql::Db <<| tag == $::domain |>> {
+    Mysql::Db <<| tag == $facts['networking']['domain'] |>> {
       require => Anchor['mariadb::server::end'],
     }
-    -> Mariadb::Db_grant <<| tag == $::domain |>> {
+    -> Mariadb::Db_grant <<| tag == $facts['networking']['domain'] |>> {
       require => Anchor['mariadb::server::end'],
     }
   }

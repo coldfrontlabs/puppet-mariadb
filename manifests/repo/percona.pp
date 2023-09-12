@@ -4,7 +4,7 @@
 
 class mariadb::repo::percona {
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat': {
       anchor { 'mariadb::repo::percona::start': }
       -> class { 'mariadb::repo::percona::yum': }

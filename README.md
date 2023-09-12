@@ -87,7 +87,7 @@ class { 'mariadb::server':
 
 ```puppet
 class { 'mariadb::cluster':
-  wsrep_cluster_peers     => delete(['192.168.1.1', '192.168.1.2', '192.168.1.3'], $::ipaddress),
+  wsrep_cluster_peers     => delete(['192.168.1.1', '192.168.1.2', '192.168.1.3'], $facts['networking']['ip']),
   wsrep_cluster_name      => 'my_super_cluster',
   wsrep_sst_password      => 'super_secret_password',
   wsrep_sst_method        => 'xtrabackup-v2',

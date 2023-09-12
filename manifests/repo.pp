@@ -7,7 +7,7 @@ class mariadb::repo (
   Boolean $percona_repo = false,
 ) inherits mariadb::params {
 
-  $os = $::operatingsystem ? {
+  $os = $facts['os']['name'] ? {
     'RedHat'      => 'rhel',
     'CentOS'      => 'centos',
     'Fedora'      => 'fedora',
@@ -17,13 +17,13 @@ class mariadb::repo (
     'Rocky'       => 'rhel',
     'AlmaLinux'   => 'rhel',
   }
-  $arch = $::architecture ? {
+  $arch = $facts['os']['architecture'] ? {
     'i386'   => 'x86',
     'x86_64' => 'amd64',
-    default  => $::architecture,
+    default  => $facts['os']['architecture'],
   }
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat': {
       include 'mariadb::repo::yum'
     }
