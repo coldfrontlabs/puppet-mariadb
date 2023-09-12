@@ -64,8 +64,8 @@ class mariadb::params {
     # backup
     $backup_package_name = 'MariaDB-backup'
   } elsif ($facts['os']['family'] == 'Debian') and (
-    (($::operatingsystem == 'Debian') and (versioncmp($facts['os']['release']['full'], '7.0') >= 0)) or
-    (($::operatingsystem == 'Ubuntu') and (versioncmp($facts['os']['release']['full'], '12.0') >= 0))
+    (($facts['os']['name'] == 'Debian') and (versioncmp($facts['os']['release']['full'], '7.0') >= 0)) or
+    (($facts['os']['name'] == 'Ubuntu') and (versioncmp($facts['os']['release']['full'], '12.0') >= 0))
   ) {
     # client.pp
     $client_package_name = 'mariadb-client'
@@ -144,10 +144,10 @@ class mariadb::params {
     'mysqld' => {
       'wsrep_on'                        => 'ON',
       'wsrep_provider'                  => $wsrep_provider,
-      'wsrep_node_name'                 => $::hostname,
-      'wsrep_slave_threads'             => '1', # $::processorcount * 2
-      'wsrep_node_address'              => $::ipaddress,
-      'wsrep_node_incoming_address'     => $::ipaddress,
+      'wsrep_node_name'                 => $facts['networking']['hostname'],
+      'wsrep_slave_threads'             => '1', # $facts['processors']['count'] * 2
+      'wsrep_node_address'              => $facts['networking']['ip'],
+      'wsrep_node_incoming_address'     => $facts['networking']['ip'],
       'binlog_format'                   => 'ROW',
       'default_storage_engine'          => 'InnoDB',
       'innodb_autoinc_lock_mode'        => '2',
