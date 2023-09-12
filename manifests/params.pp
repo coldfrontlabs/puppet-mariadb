@@ -30,7 +30,7 @@ class mariadb::params {
   $wsrep_sst_method      = 'mysqldump'
   $root_password         = 'UNSET' # lint:ignore:security_password_in_code
 
-  if ($::osfamily == 'RedHat') and (versioncmp($::operatingsystemrelease, '6.0') >= 0) {
+  if ($facts['os']['family'] == 'RedHat') and (versioncmp($facts['os']['release']['full'], '6.0') >= 0) {
     # client.pp
     $client_package_name = 'MariaDB-client'
     $shared_package_name = 'MariaDB-shared'
@@ -63,9 +63,9 @@ class mariadb::params {
 
     # backup
     $backup_package_name = 'MariaDB-backup'
-  } elsif ($::osfamily == 'Debian') and (
-    (($::operatingsystem == 'Debian') and (versioncmp($::operatingsystemrelease, '7.0') >= 0)) or
-    (($::operatingsystem == 'Ubuntu') and (versioncmp($::operatingsystemrelease, '12.0') >= 0))
+  } elsif ($facts['os']['family'] == 'Debian') and (
+    (($::operatingsystem == 'Debian') and (versioncmp($facts['os']['release']['full'], '7.0') >= 0)) or
+    (($::operatingsystem == 'Ubuntu') and (versioncmp($facts['os']['release']['full'], '12.0') >= 0))
   ) {
     # client.pp
     $client_package_name = 'mariadb-client'
@@ -100,7 +100,7 @@ class mariadb::params {
     # backup
     $backup_package_name = 'mariadb-backup'
   } else {
-    fail("The ${module_name} module is not supported on a ${::osfamily} based system with version ${::operatingsystemrelease}.")
+    fail("The ${module_name} module is not supported on a ${facts['os']['family']} based system with version ${facts['os']['release']['full']}.")
   }
 
   $client_default_options = {
