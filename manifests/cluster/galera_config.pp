@@ -52,11 +52,16 @@ class mariadb::cluster::galera_config {
     -> File["${mariadb::cluster::config_dir}/cluster.cnf"]
   }
 
+  $parameters = {
+    'options' => $options,
+    'includedir' => $includedir,
+  }
+
   file { "${mariadb::cluster::config_dir}/cluster.cnf":
     ensure  => file,
     owner   => $mariadb::cluster::user,
     group   => $mysql::params::root_group,
     mode    => '0600',
-    content => template('mysql/my.cnf.erb'),
+    content => epp('mysql/my.cnf.epp', $parameters),
   }
 }
